@@ -24,8 +24,7 @@ async function callGemini(prompt) {
       res.data.candidates?.[0]?.content?.parts?.[0]?.text ||
       "No Gemini response"
     );
-    // return 'John McCarthy coined the term "Artificial intelligence" (AI). He did so in 1955, in preparation for the Dartmouth Workshop held in 1956, which is widely considered the founding \
-    //   event of the field.';
+   
   } catch (error) {
     console.error("Gemini API error:", error);
     return `Gemini Error: ${error.response?.status || ""} - ${
