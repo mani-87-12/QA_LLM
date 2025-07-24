@@ -16,9 +16,6 @@ async function callGroq(prompt) {
     });
 
     return response.choices[0]?.message?.content || "No Grok response";
-    // return 'The term "Artificial Intelligence" (AI) was coined by John McCarthy, an American computer scientist and cognitive scientist. \
-    // McCarthy first used the term in 1956, at the Dartmouth Summer Research Project on Artificial Intelligence. \
-    // He is often credited with coining the term and organizing the first workshop on AI.';
   } catch (error) {
     console.error("Grok API error:", error);
     return `Grok Error: ${error.message || error.toString()}`;
