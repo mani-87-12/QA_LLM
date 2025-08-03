@@ -1,22 +1,20 @@
 let pipeline = null;
 let llmInstance;
 
-const getLLMInstance = async () => {
-  if (!llmInstance) {
+(async () => {
+  try {
+    const transformersModule = await import("@xenova/transformers");
+    pipeline = transformersModule.pipeline;
+
     console.log("Loading model: distilgpt2...");
-    try {
-      const transformersModule = await import("@xenova/transformers");
-      pipeline = transformersModule.pipeline;
-      llmInstance = await pipeline("text-generation", "Xenova/distilgpt2");
-      console.log("Model loaded successfully for classifying.");
-    } catch (error) {
-      console.error("Error loading transformers model:", error);
-      llmInstance = null;
-      throw new Error("Failed to load the model.");
-    }
+    llmInstance = await pipeline("text-generation", "Xenova/distilgpt2");
+    console.log("Model loaded successfully for classifying.");
+  } catch (error) {
+    console.error("Error loading transformers model:", error);
+    llmInstance = null;
+    throw new Error("Failed to load the model.");
   }
-  return llmInstance;
-};
+})();
 
 const callHuggingFace = async (prompt) => {
   if (!llmInstance) {
@@ -40,4 +38,4 @@ const callHuggingFace = async (prompt) => {
     );
   }
 };
-module.exports = { callHuggingFace, getLLMInstance };
+module.exports = { callHuggingFace };

@@ -9,7 +9,6 @@ const classifyPromptType = require("./classyfing_prompt");
 const { constructEnhancedPrompt } = require("./enhacing_prompt");
 const { getEmbedding, calculateCosineSimilarity } =
   require("./embedding_cosine").default;
-const { getLLMInstance } = require("./huggingFace");
 const app = express();
 const PORT = 5000;
 
@@ -68,16 +67,20 @@ app.post("/ask", async (req, res) => {
   });
 });
 
-const startServer = async () => {
-  try {
-    await getLLMInstance();
-    app.listen(PORT, () => {
-      console.log(`Server running on http://localhost:${PORT}`);
-    });
-  } catch (error) {
-    console.error("Failed to start server:", error);
-    process.exit(1);
-  }
-};
+// const startServer = async () => {
+//   try {
+//     await getLLMInstance();
+//     app.listen(PORT, () => {
+//       console.log(`Server running on http://localhost:${PORT}`);
+//     });
+//   } catch (error) {
+//     console.error("Failed to start server:", error);
+//     process.exit(1);
+//   }
+// };
 
-startServer();
+// startServer();
+
+app.listen(PORT, () =>
+  console.log(`Server running on http://localhost:${PORT}`)
+);
