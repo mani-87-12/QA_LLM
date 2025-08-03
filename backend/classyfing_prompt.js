@@ -1,4 +1,4 @@
-const callingOllama = require("./ollama");
+const callHuggingFace = require("./huggingFace");
 
 const QUESTION_TYPES = [
   "WH_QUESTION",
@@ -21,7 +21,7 @@ const classifyPromptType = async (userPrompt) => {
     Category:`;
 
   try {
-    const response = await callingOllama(classificationPrompt);
+    const response = await callHuggingFace(classificationPrompt);
     const classifiedType = response.trim().toUpperCase();
 
     if (QUESTION_TYPES.includes(classifiedType)) {
